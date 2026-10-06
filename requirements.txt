@@ -1,0 +1,11 @@
+pyspark==4.0.1
+pandas<3
+numpy
+openpyxl
+scikit-learn
+xgboost
+joblib
+fastapi
+uvicorn
+python-multipart
+confluent-kafka
