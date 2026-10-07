@@ -14,17 +14,6 @@ kafka_producer.py     replays the raw workbook OR runs the 30s synthetic demo st
 kafka_stream.py       Spark Structured Streaming: Kafka -> clean -> parquet (+ optional prediction)
 docker-compose.yml    single-node Kafka for local use
 data/raw/Vehicle_Data_ DwellTime _Tra.xlsx    <- put your workbook here
-```
-
-| Old (pandas)                              | New (Spark)                                              |
-|-------------------------------------------|----------------------------------------------------------|
-| `shift`, `rolling`, `cumsum`              | `lag/lead`, `sum/avg over rowsBetween`, running `sum`    |
-| `groupby(floor("15min"))` + `reindex`     | `groupBy(bucket)` + `sequence()` grid + joins            |
-| per-timestamp counts in `inference_*`     | one Spark aggregation per prediction                     |
-| `train.py` → `joblib` XGBoost models      | unchanged (XGBoost on the collected supervised table)    |
-
-I checked the Spark output against your pandas pipeline on the same data: identical training rows,
-identical feature/target values, identical exact-time inference features.
 
 ---
 
